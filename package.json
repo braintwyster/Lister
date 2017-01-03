@@ -1,0 +1,36 @@
+{
+  "name": "lister",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon server/index.js --ignore node_modules/"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.0",
+    "body-parser": "~1.15.2",
+    "bootstrap": "^3.3.7",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.14.2",
+    "express-validator": "^3.1.0",
+    "fly": "^1.4.1",
+    "knex": "^0.12.6",
+    "morgan": "~1.7.0",
+    "mysql": "github:mysqljs/mysql",
+    "node-sass-middleware": "0.9.8",
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "flightplan": "^0.6.15",
+    "fly": "^1.4.1"
+  }
+}

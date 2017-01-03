@@ -1,0 +1,36 @@
+
+body{
+	padding-top: 50px;
+  	padding-bottom: 20px;
+  	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a{
+  color: #00B7FF;
+}
+
+._no_pad{
+	padding:0;
+}
+._no_margin{
+	margin:0;
+}
+
+#_landing{
+	display:flex;
+
+	._register_landing{
+		padding:15px 30px;
+		font-size:2em;
+		align-self: flex-end;
+	}
+}
+#_registration{
+	.centered-form{
+		margin-top: 60px;
+	}
+
+	.centered-form .panel{
+		background: rgba(255, 255, 255, 0.8);
+		box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+	}
+}

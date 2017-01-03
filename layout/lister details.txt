@@ -1,0 +1,40 @@
+lister process:
+	user creates company
+	user creates lister for that company 
+	user adds items to lister
+	user can choose attribute for item
+
+lister item attributes:
+	general use:
+		extra- image: <img src="" class="" />
+		rating: 5 - star
+		qty: int
+		
+	drinks:
+		abv: float
+		ibu: float
+		volume: int - oz
+		brewery: string - input
+		type: string
+
+	weed:
+		thc: float
+		cbd: float
+		strain: enum - indica, sativa, hybrid
+		grower/farm: string - input
+		type: enum - flower, consentrates, extracts, edibles
+		weight: int - grams
+
+	books:
+		pages: int
+		release-date: timestamp
+		genre: string
+		sub-genre: string
+		publisher: string
+		author: string
+
+	Other
+		height: int - cm
+		width: int - cm
+		depth: int - cm
+
