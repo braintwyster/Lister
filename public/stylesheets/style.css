@@ -6,6 +6,12 @@ body {
 a {
   color: #00B7FF; }
 
+h1 {
+  font-size: 44px !important; }
+
+._raise {
+  box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px; }
+
 ._no_pad {
   padding: 0; }
 
@@ -13,7 +19,8 @@ a {
   margin: 0; }
 
 #_landing {
-  display: flex; }
+  display: flex;
+  justify-content: space-between; }
 
 #_landing ._register_landing {
   padding: 15px 30px;
@@ -26,4 +33,3 @@ a {
 #_registration .centered-form .panel {
   background: rgba(255, 255, 255, 0.8);
   box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px; }
-0px; }

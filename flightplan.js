@@ -11,6 +11,7 @@ plan.target('staging', [
   {
     host: '159.203.247.120',
     username: username,
+    privateKey: '~/.ssh/id_rsa',
     agent: process.env.SSH_AUTH_SOCK
   }
 ]);
@@ -19,6 +20,7 @@ plan.target('production', [
   {
     host: '159.203.247.120',
     username: username,
+    privateKey: '/Users/braintwyster/.ssh/id_rsa',
     agent: process.env.SSH_AUTH_SOCK
   },
 //add in another server if you have more than one

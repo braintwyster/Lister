@@ -10,7 +10,7 @@ router.get('/', function(req, res, next){
 
 //////////////////////////////////////////////
 ////USER SIDE LISTER EDITING AND CREATING/////
-router.get('/new', [Auth, isComp], function(req, res, next) {
+router.get('/new', /*[Auth, isComp], */function(req, res, next) {
 	var cid
 	if(req.company_id)
 		cid = req.company_id	
@@ -135,7 +135,7 @@ router.post('/items', function(req, res){
 				//add err
 			}else{
 				res.redirect('/dashboard')
-				console.log('this worked')
+				// console.log('this worked')
 			}
 		})
 	}

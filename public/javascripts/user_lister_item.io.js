@@ -87,7 +87,7 @@ $(function(){
 		var $set 	= $name
 			$set 	= $set.replace(' ', '')
 			$set 	= $set.replace('-', '')
-			console.log($set)
+			// console.log($set)
 		if(!preCheck($set, $preCheck)){
 			return
 		}

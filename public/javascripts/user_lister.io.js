@@ -19,10 +19,15 @@ $(function(){
 
 	$listerMenuData.on("click", "._list_item", function(event){
 		$listerData.html('')
-		$listerData.html('<a href="/listers/items/add/'+this.id+'" class="btn btn-success _add_item_btn">Add An Item</a>')
+		$listerData.html('<a href="#" data-listerid="'+this.id+'" class="btn btn-primary _update_live_btn">Update Live Lister</a>'+
+			'<a href="/listers/items/add/'+this.id+'" class="btn btn-success _add_item_btn">Add An Item</a>')
 	    socket.emit('get this lister', this.id)
 	})
 
+	$listerData.on("click", "._update_live_btn", function(e){
+		e.preventDefault()
+		socket.emit('update lister', e.target.dataset.listerid)
+	})
 ////////////////////////
 	socket.on('send items', function(data, lid){
 		socket.emit('get attrs', data)

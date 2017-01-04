@@ -12,7 +12,7 @@ function Lister(){
 	var protect = ['id']
 
 	this.getChild = function(lid, callback){
-		console.log(lid)
+		// console.log(lid)
 		Model.ListerItem.getItemData(lid, function(err, items){
 			callback(items)
 		})

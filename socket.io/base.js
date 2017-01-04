@@ -2,23 +2,18 @@ module.exports = function (io) {
 	var models  = require('../models/Models');
 	var Model   = new models; 
 
-	users 		= []
 	connections = []
 	listers 	= {}
-	admins 		= []
 	io.sockets.on('connection', function(socket){
 		connections.push(socket)
 		console.log('connected: %s sockets connected', connections.length)
 
 		//disconnect
 		socket.on('disconnect', function (data) {
-			if(socket.user)
-				if(socket.user.role == 'user')
-					users.splice(users.indexOf(socket.user), 1)
-				else
-					admins.splice(admins.indexOf(socket.user), 1)
 
-
+			Object.keys(listers).forEach(function(x){
+				listers[x].socketIDs.splice(socket.id)
+			})
 			connections.splice(connections.indexOf(socket), 1)
 			console.log("disconnected: %s sockets connected", connections.length)
 		})
@@ -30,9 +25,25 @@ module.exports = function (io) {
 			}
 			
 			listers[lid].socketIDs.push(socket.id)
-			// console.log(listers)
+			console.log(listers)
 		})
-
+		socket.on('disconnect lister', function(lid){
+			if(listers[lid]){
+				listers[lid].socketIDs.splice(socket.id)
+			}
+		})
+		socket.on('update lister', function(lid){
+			Model.Lister.getChild(lid, function(data){
+				if(listers[lid]){
+					ls = listers[lid].socketIDs
+					for (var i = 0; i < ls.length; i++) {
+						if(io.sockets.connected[ls[i]]){
+							io.sockets.connected[ls[i]].emit('send items', data, lid, true)
+						}
+					}
+				}
+			})
+		})
 /////////////////////
 		///Get all lister		
 		socket.on('get listers', function(){
@@ -45,9 +56,9 @@ module.exports = function (io) {
 /////////////////////
 		///GET LISTER ITEMS 
 		socket.on('get this lister', function(lid){
-				console.log(lid)
+				// console.log(lid)
 			Model.Lister.getChild(lid, function(data){
-				socket.emit('send items', data, lid)
+				socket.emit('send items', data, lid, false)
 			})
 		})
 		

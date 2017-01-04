@@ -19,11 +19,11 @@ $(function(){
 	})
 
 ////HANDLE ITEMS
-	$listerMenuData.on("click", "._list_item", function(event){
+	$listerMenuData.on("click", "._list_item", function(e){
 		$listerID = this.id
 		$listerData.html('')
 		$listHeader.html('')
-		$listHeader.html(event.target.dataset.name)
+		$listHeader.html(e.target.dataset.name)
 		$publicDisplay.slideDown()
 	    socket.emit('get this lister', $listerID)
 	    socket.emit('connect lister', $listerID)
@@ -44,10 +44,16 @@ $(function(){
 		// alert($listerID)
 		socket.emit('exit public', $listerID)
 		$publicDisplay.slideUp()
+	    socket.emit('disconnect lister', $listerID)
+
 	})
 ////////////////////////
-	socket.on('send items', function(data, lid){
+	socket.on('send items', function(data, lid, update){
+		if(update){
+			$listerData.html('')
+		}
 		socket.emit('get attrs', data)
+
 	})
 
 ////////////////////////

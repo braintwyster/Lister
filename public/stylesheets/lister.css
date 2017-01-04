@@ -238,25 +238,3 @@
   #_display_lister_public #_display_items #_lister_data ._list_item {
     min-width: 100%;
     max-width: 100%; } }
-255, 255, 255, 0.3); }
-    #_display_lister_public #_display_items #_lister_data {
-      flex-direction: row;
-      flex-wrap: wrap; }
-      #_display_lister_public #_display_items #_lister_data ._item_img {
-        background: rgba(150, 150, 0, 0.6);
-        border: 2px solid #aa0; }
-      #_display_lister_public #_display_items #_lister_data ._item_data_container {
-        border: 1px solid rgba(150, 150, 0, 0.6); }
-      #_display_lister_public #_display_items #_lister_data ._list_item {
-        min-width: 50%;
-        max-width: 50%; }
-
-@media only screen and (max-width: 1024px) {
-  #_display_lister_public #_display_items #_lister_header_container #_lister_header {
-    font-size: 2em; }
-  #_display_lister_public #_display_items #_lister_header_container #_exit_lister_display {
-    font-size: 1.5em;
-    border: #fff 5px solid; }
-  #_display_lister_public #_display_items #_lister_data ._list_item {
-    min-width: 100%;
-    max-width: 100%; } }
