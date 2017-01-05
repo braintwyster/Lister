@@ -20,14 +20,18 @@ function ItemAttrs(){
 
 	function rating(attr, clas){
 		var stars = '<div class="_stars_container">'
+		var substars = ''
 		var empty = '' 
+		var noIfSub = 'Rating'
+		if(clas == 'sub'){
+			noIfSub = ''
+			substars = ' _sub_stars'
+		}
 		for (var i = 0; i < attr.value; i++) {
-			stars += '<div class="_star _full_star"></div>'
+			stars += '<div class="_star _full_star'+substars+'"></div>'
 		}
 		stars += '</div>'
-		var noIfSub = 'Rating'
-		if(clas == 'sub')
-			noIfSub = ''
+
 		return '<div class="_attr_div _'+clas+'_attr" data-type="'+attr.type+'">'+
 					'<div class="_attr_unit">'+noIfSub+'</div>'+
 					'<div class="_attr_val">'+stars+'</div>'+
@@ -35,7 +39,7 @@ function ItemAttrs(){
 	}
 	function numbers(attr, clas){
 		return '<div class="_attr_div _'+clas+'_attr" data-type="'+attr.type+'">'+
-					'<div class="_attr_unit">'+attr.unit+':</div>'+
+					'<div class="_attr_unit">'+titleCase(attr.unit)+':</div>'+
 					'<div class="_attr_val">&nbsp;'+attr.value+'</div>'+
 				'</div>';
 	}
@@ -48,7 +52,7 @@ function ItemAttrs(){
 
 		var date = month + ' \'' + year
 		return '<div class="_attr_div _'+clas+'_attr" data-type="'+attr.type+'">'+
-					'<div class="_attr_unit">'+attr.unit+'</div>'+
+					'<div class="_attr_unit">Release:</div>'+
 					'<div class="_attr_val">'+date+'</div>'+
 				'</div>';
 	}

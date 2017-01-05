@@ -25,14 +25,18 @@ xListerItem.displayItem = function(data, callback){
 	var item 	= data
 	var attrs   = item.attrs
 	var images 	= attrs.images
-	var main 	= attrs.main
+	var main 	= ''
+	if(typeof attrs.main != 'undefined')
+		main = attrs.main[0]
 	var subs 	= ''
 	var car 	= ''
-	
-	for (var i = 0; i < attrs.subs.length; i++) {
-		subs += attrs.subs[i]
+
+	if(typeof attrs.subs != 'undefined'){
+		for (var i = 0; i < attrs.subs.length; i++) {
+			subs += attrs.subs[i]
+		}
 	}
-	if(images.length > 1){
+	if(typeof images != 'undefined' && images.length > 1){
 		var pips = ''
 		var imgs = ''
 		for (var i = 0; i < images.length; i++) {
@@ -57,22 +61,28 @@ xListerItem.displayItem = function(data, callback){
 				  	'</div>'+
 				'</div>';
 		car = '<script type="text/javascript">$(\'#slide'+item.id+'\').carousel({interval: 4000,cycle: true});</script>';
+		images = '<div class="_item_img">'+images+'</div>'
+	}else if(typeof images == 'undefined' || images == '' || !images){
+		images = '<div class="_item_img _no_img"></div>'
+	}else{
+		images = '<div class="_item_img">'+images+'</div>'
 	}
-	var html = '<li class="col_sm_12 _list_item well" id="'+item.id+'">'+
+
+	var html = '<li class="col_sm_12 _list_item" id="'+item.id+'">'+
 				'<div class="_item_main_container">'+
-					'<div class="_item_img">'+images+'</div>'+
+					'<div class="_item_nd">'+	
+						'<div class="_item_name">'+item.name+'</div>'+
+						'<div class="_item_description">'+item.description+'</div>'+
+					'</div>'+
 					'<div class="_item_data_container">'+
-						'<div class="_upper_item">'+
-							'<div class="_item_nd well">'+	
-								'<div class="_item_name">'+item.name+'</div>'+
-								'<div class="_item_description">'+item.description+'</div>'+
+						images+
+						'<div class="_item_attr_data">'+
+							'<div class="_item_main_attrs">'+
+								main+
 							'</div>'+
-							'<div class="_item_main_attrs well">'+
-								main[0]+
+							'<div class="_item_sub_contianer">'+
+								subs+
 							'</div>'+
-						'</div>'+
-						'<div class="_item_sub_contianer">'+
-							subs+
 						'</div>'+
 					'</div>'+
 				'</div>'+

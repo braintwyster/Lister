@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:700');
 
 body{
 	padding-top: 50px;
   	padding-bottom: 20px;
-  	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  	font: 16px "Oswald", Helvetica, sans-serif;
+    font-weight:bold;
+    // letter-spacing: 0.6px;
+    // text-shadow: 1px 1px 2px #F41;
 }
 a{
   color: #00B7FF;
@@ -20,7 +24,32 @@ h1{
 ._no_margin{
 	margin:0;
 }
+.btn-success {
+    background-color: #fd772b;
+    border-color: #fd772b;
+}
+.btn-success:hover,.btn-success:active, .btn-success:focus{
+	background-color:#fe630a;
+	border-color:#fe630a;
+}
 
+.btn-primary{
+	background-color:#29b329;
+	border-color:#29b329;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background-color: #04c204;
+    border-color: #04c204;
+}
+
+.navbar-inverse {
+    background-color: #000;
+    border-color: #000;
+}
+#_logo{
+	padding:0px;
+}
 #_landing{
 	display:flex;
 	justify-content: space-between;
