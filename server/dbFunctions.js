@@ -1,11 +1,5 @@
 var knex 	= require('./db')
 var mysql   = require('mysql');
-var con 	= mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'lister'
-});
 
 function DBFuncitons(table){
 	this.table = table

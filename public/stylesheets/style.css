@@ -11,6 +11,12 @@ a {
 h1 {
   font-size: 44px !important; }
 
+.jumbotron {
+  background-color: rgba(100, 100, 100, 0.1); }
+
+.well {
+  background-color: #fff; }
+
 ._raise {
   box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px; }
 
@@ -58,3 +64,17 @@ h1 {
 #_registration .centered-form .panel {
   background: rgba(255, 255, 255, 0.8);
   box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px; }
+
+footer #_footer_links {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8em; }
+
+footer #_footer_links ul {
+  list-style-type: none; }
+
+footer #_footer_links ._footer_links {
+  align-self: center; }
+
+footer #_copy_r {
+  font-size: 0.8em; }

@@ -1,5 +1,5 @@
 'use strict'
-var dbF 	= require('../server/dbFunctions');
+var dbF 	= require('../../server/dbFunctions');
 var table 	= 'item_attrs';
 function ItemAttrs(){
 	this.table = table

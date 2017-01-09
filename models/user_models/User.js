@@ -1,9 +1,8 @@
 'use strict'
-var dbF 	= require('../server/dbFunctions')
+var dbF 	= require('../../server/dbFunctions')
 var bcrypt 	= require('bcryptjs')
 
 var table 	= 'users';
-//User Model
 function User(){
 	this.table = table
 				
@@ -12,11 +11,8 @@ function User(){
 	var protect = ['id', 'password']
 
 }
-//Add DBFunctions to Model
 User.prototype = new dbF(table);
-//Init User Model
 var xUser 	= new User;
-///Add creative Funtion to user model
 
 function checkExists(username, email, callback){
 	User.prototype.find().where({email:email}, function(user){
@@ -85,12 +81,5 @@ xUser.checkPassword = function(cPass, hash, callback){
 		}
 	})
 }
-
-
-
-
-
-
-
 
 module.exports = xUser

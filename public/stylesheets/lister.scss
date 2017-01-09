@@ -88,7 +88,15 @@
 			border: 1px solid rgba(0,0,0,0.3);
 			border-radius:5px;
 			height: 130px;
-			background: rgba(39,154,100, 0.3);
+			background: rgba(189,189,189,1);
+			background: -moz-linear-gradient(top, rgba(189,189,189,1) 0%, rgba(148,148,148,1) 15%, rgba(135,135,135,1) 86%, rgba(112,107,112,1) 100%);
+			background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(189,189,189,1)), color-stop(15%, rgba(148,148,148,1)), color-stop(86%, rgba(135,135,135,1)), color-stop(100%, rgba(112,107,112,1)));
+			background: -webkit-linear-gradient(top, rgba(189,189,189,1) 0%, rgba(148,148,148,1) 15%, rgba(135,135,135,1) 86%, rgba(112,107,112,1) 100%);
+			background: -o-linear-gradient(top, rgba(189,189,189,1) 0%, rgba(148,148,148,1) 15%, rgba(135,135,135,1) 86%, rgba(112,107,112,1) 100%);
+			background: -ms-linear-gradient(top, rgba(189,189,189,1) 0%, rgba(148,148,148,1) 15%, rgba(135,135,135,1) 86%, rgba(112,107,112,1) 100%);
+			background: linear-gradient(to bottom, rgba(189,189,189,1) 0%, rgba(148,148,148,1) 15%, rgba(135,135,135,1) 86%, rgba(112,107,112,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdbdbd', endColorstr='#706b70', GradientType=0 );
+
 			._stars_container{
 				display: flex;
 				flex-direction: row;
@@ -133,7 +141,7 @@
 					    max-height: 90px;
 					    overflow: hidden;
 					    border-radius: 5px;
-					    background:rgba(200,200,2000,0.7);
+					    background:rgba(255,255,255,0.7);
 					    z-index: 9;
 	 					._img_attr{
 	 						min-height: 123px;
@@ -162,8 +170,9 @@
 							padding: 6px;
 							display: flex;
     						justify-content: flex-end;
+    						flex-basis: 75%;
 							._main_attr{
-								flex-basis:20%;
+								flex-basis:13%;
 								display: flex;
 								flex-direction: column;	
 								align-items:center;
@@ -185,6 +194,7 @@
 							flex-direction: row;
 							justify-content: space-around;
 							padding-left:6px;
+							flex-basis: 25%;
 							._sub_attr{
 								flex-grow: 1;
 								border-left: 1px solid rgba(100,150,43,0.6);

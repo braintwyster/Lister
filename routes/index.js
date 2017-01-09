@@ -8,6 +8,9 @@ router.get('/', AuthDash, function(req, res, next) {
   res.render('index', { title: 'DigiLister' });
 });
 
+router.get('/test', AuthDash, function(req, res, next) {
+	res.send(202)
+});
 
 router.get('/dashboard', [Auth], function(req, res, next) {
   	res.render('dashboard', { user:req.user[0].id});

@@ -1,10 +1,13 @@
 'use strict'
 function Models(){
-	this.User 		= require('./User')
-	this.Company 	= require('./Company')
-	this.Lister 	= require('./Lister')
-	this.ListerItem	= require('./ListerItem')
-	this.ItemAttr	= require('./ItemAttrs')
+	this.User 		= require('./user_models/User')
+	this.UserTime	= require('./user_models/UserTime')
+	this.UserTrans  = require('./user_models/UserTransactions')
+	this.UserSub	= require('./user_models/UserSubscription')
+	this.Company 	= require('./user_models/Company')
+	this.Lister 	= require('./lister_models/Lister')
+	this.ListerItem	= require('./lister_models/ListerItem')
+	this.ItemAttr	= require('./lister_models/ItemAttrs')
 	this.General	= require('./attributes/Generals')
 	this.Book		= require('./attributes/Books')
 	this.Drink		= require('./attributes/Drinks')

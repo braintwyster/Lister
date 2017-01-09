@@ -1,5 +1,5 @@
 'use strict'
-var dbF = require('../server/dbFunctions');
+var dbF = require('../../server/dbFunctions');
 var table = 'companies';
 
 function Company(){

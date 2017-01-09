@@ -108,6 +108,55 @@ exports.up = function(knex, Promise) {
             table.string('unit');
             table.timestamps();
         }),
+
+        knex.schema.createTableIfNotExists('user_transactions', function(table){
+            table.increments('id').primary();
+            table.enu('success', ['0','1']);
+            table.float('amount');
+            table.string('ip_address');
+            table.string('customer_id');
+            table.integer('user_id')
+                .unsigned()
+                .references('id')
+                .inTable('users')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE');
+            table.index('user_id', 'index');
+            table.timestamps();
+        }),
+
+        knex.schema.createTableIfNotExists('user_time', function(table){
+            table.increments('id').primary();
+            table.integer('time_left');
+            table.integer('time_base');
+            table.integer('time_added');
+            table.integer('time_free');
+            table.integer('user_id')
+                .unsigned()
+                .references('id')
+                .inTable('users')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE');
+            table.index('user_id', 'index');
+            table.timestamps();
+        }),
+
+        knex.schema.createTableIfNotExists('subscriptions', function(table){
+            table.increments('id').primary();
+            table.string('charge_id');
+            table.timestamp('charge_date').defaultTo(knex.fn.now());
+            table.enu('paid', ['0', '1']);
+            table.integer('package_time');
+            table.enu('refunded', ['0', '1']);
+            table.integer('user_id')
+                .unsigned()
+                .references('id')
+                .inTable('users')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE');
+            table.index('user_id', 'index');
+            table.timestamps();
+        }),
     ])
 };
 
@@ -117,7 +166,13 @@ exports.down = function(knex, Promise) {
         knex.schema.dropTable('companies'),
         knex.schema.dropTable('listers'),
         knex.schema.dropTable('lister_items'),
-        knex.schema.dropTable('item_attributes'),
-        knex.schema.dropTable('attributes')
+        knex.schema.dropTable('item_attrs'),
+        knex.schema.dropTable('generals'),
+        knex.schema.dropTable('books'),
+        knex.schema.dropTable('drinks'),
+        knex.schema.dropTable('weeds'),
+        knex.schema.dropTable('user_transactions'),
+        knex.schema.dropTable('user_time'),
+        knex.schema.dropTable('subscriptions')
     ])
 };

@@ -1,7 +1,7 @@
 'use strict'
-var dbF = require('../server/dbFunctions');
+var dbF = require('../../server/dbFunctions');
 var table = 'listers';
-var models  = require('./Models');
+var models  = require('../Models');
 var Model   = new models; 
 
 function Lister(){

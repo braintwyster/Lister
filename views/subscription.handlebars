@@ -1,0 +1,27 @@
+<div class="container" id="_subscription">
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    	<h3 class="panel-title">Subscription</h3>
+			    	{{#if errors}}
+			    		{{#each errors}}
+			    			<div class="alert alert-danger">
+			    				{{msg}}
+			    			</div>
+			    		{{/each}}
+			    	{{/if}}
+			 	</div>
+			 	<div class="panel-body">
+			    	<form role="form" action="/users/subscription" method="post">
+	    				<div class="form-group">
+	    				
+	    				</div>
+			    		
+	    			    <input type="submit" value="Choose Subscription" class="btn btn-success btn-block">
+		    		</form>
+		    	</div>
+    		</div>
+		</div>
+	</div>
+</div>

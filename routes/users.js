@@ -5,6 +5,11 @@ var LocalStrategy 	= require('passport-local').Strategy;
 var models 			= require('../models/Models');
 var Model   		= new models; 
 
+
+router.get('/subscription', function(req, res){
+	res.render('subscription')
+})
+
 router.get('/register', function(req, res) {
 	res.render('register')
 });

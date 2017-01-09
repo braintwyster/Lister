@@ -10,7 +10,7 @@ router.get('/', function(req, res, next){
 
 //////////////////////////////////////////////
 ////USER SIDE LISTER EDITING AND CREATING/////
-router.get('/new', /*[Auth, isComp], */function(req, res, next) {
+router.get('/new', [Auth, isComp], function(req, res, next) {
 	var cid
 	if(req.company_id)
 		cid = req.company_id	
@@ -54,7 +54,7 @@ router.get('/items/add/:lid', Auth, function(req, res, next) {
 	});
 });
 
-router.post('/items', function(req, res){
+router.post('/items', Auth, function(req, res){
 	var inputs = req.body
 	var errs = []
 

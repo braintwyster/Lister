@@ -15,6 +15,13 @@ h1{
 	font-size:44px !important;
 }
 
+.jumbotron {
+    background-color: rgba(100,100,100,0.1);
+}
+.well{
+	background-color:#fff;
+}
+
 ._raise{
 	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
 }
@@ -67,5 +74,30 @@ h1{
 	.centered-form .panel{
 		background: rgba(255, 255, 255, 0.8);
 		box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+	}
+}
+
+
+
+footer{
+	#_footer_links{
+		display: flex;
+		flex-direction: row;
+		font-size: 0.8em;
+		ul{
+			list-style-type: none;
+		}
+		._footer_links{
+			align-self:center;
+		}
+		._footer_links_left{
+
+		}
+		._footer_links_right{
+			
+		}
+	}
+	#_copy_r{
+		font-size: 0.8em;
 	}
 }
