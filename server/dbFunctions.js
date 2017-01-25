@@ -2,7 +2,8 @@ var knex 	= require('./db')
 var mysql   = require('mysql');
 
 function DBFuncitons(table){
-	this.table = table
+	this.table = table;
+
 	this.find = function(req, callback){
 		if(typeof req != 'object' && typeof req === 'number'){		
 			knex(this.table).where({id:req}).then(function(data){

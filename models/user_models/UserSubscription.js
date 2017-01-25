@@ -3,11 +3,9 @@ var dbF = require('../../server/dbFunctions');
 var table = 'user_subscription';
 
 function UserSub(){
-	this.table = table
+	this.db = new dbF(table)
 
 }
 
-UserSub.prototype = new dbF(table)
-var xUserSub = new UserSub
 
-module.exports = xUserSub
+module.exports = new UserSub

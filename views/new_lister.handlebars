@@ -1,6 +1,6 @@
 <div class="container" id="_new_lister">
     <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
         	<div class="panel panel-default _raise">
         		<div class="panel-heading">
 			    	<h3 class="panel-title">Create New Lister</h3>
@@ -14,10 +14,15 @@
 			 	</div>
 			 	<div class="panel-body">
 			    	<form role="form" action="/listers/new" method="post">
-			    		<input type="hidden" name="company_id" value="{{#if fields}}{{fields.company_id}}{{/if}}{{cid}}">
+			    		<input type="hidden" name="company_id" value="{{cid}}">
+			    		<input type="hidden" name="lister_type" value="" id="_lister_type_id">
 			    		<div class="form-group">
 			    			<input type="text" name="lister_name" id="lister_name" class="form-control input-sm" placeholder="Lister Name">
 			    		</div>
+			    		<div class="form-group">
+			    			{{{types}}}
+			    		</div>
+			    		
 	    			    <input type="submit" value="Create lister" class="btn btn-success btn-block">
 			    		
 		    		</form>
@@ -26,3 +31,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	$("._lister_type_btn").click(function(){
+		$("#_lister_type_id").val($(this).attr("id"))
+		$("._lister_type_btn").css({"background":"#fd772b"})
+		$(this).css({"background":"#fdc92b"})
+	})
+</script>

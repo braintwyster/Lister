@@ -1,6 +1,6 @@
 <div class="container" id="_subscription">
     <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 _raise _no_pad">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    	<h3 class="panel-title">Subscription</h3>
@@ -13,15 +13,72 @@
 			    	{{/if}}
 			 	</div>
 			 	<div class="panel-body">
-			    	<form role="form" action="/users/subscription" method="post">
-	    				<div class="form-group">
-	    				
-	    				</div>
-			    		
-	    			    <input type="submit" value="Choose Subscription" class="btn btn-success btn-block">
-		    		</form>
+		    		<ul id="_subscription_selector">
+		    			<li id="_monthly_sub" class="_subs" data-value="month">
+		    				<div class="_upper_sub">
+			    				<div class="_sub_header">Monthly</div>
+			    				<div class="_sub_price">$25</div>
+			    			</div>
+		    				<div class="_lower_sub">
+			    				<div class="_sub_type">
+			    					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula tristique ex non consectetur. 
+			    					Quisque facilisis pulvinar velit sit amet aliquet. 
+			    					Vestibulum velit neque, faucibus sit amet iaculis sed, molestie eget ante. 
+			    				</div>
+			    			</div>
+		    			</li>
+		    			<li id="_yearly_sub" class="_subs" data-value="year">
+		    				<div class="_upper_sub">
+			    				<div class="_sub_header">Yearly</div>
+			    				<div class="_sub_price">$500</div>
+			    			</div>
+		    				<div class="_lower_sub">
+			    				<div class="_sub_type">
+			    					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula tristique ex non consectetur. 
+			    					Quisque facilisis pulvinar velit sit amet aliquet. 
+			    					Vestibulum velit neque, faucibus sit amet iaculis sed, molestie eget ante. 
+			    				</div>
+			    			</div>
+		    			</li>
+		    			<li id="_free_sub" class="_subs" data-value="free">
+		    				<div class="_upper_sub">
+			    				<div class="_sub_header">15 Day Trial</div>
+			    				<div class="_sub_price">Free</div>
+			    			</div>
+		    				<div class="_lower_sub">
+			    				<div class="_sub_type">
+			    					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula tristique ex non consectetur. 
+			    					Quisque facilisis pulvinar velit sit amet aliquet. 
+			    					Vestibulum velit neque, faucibus sit amet iaculis sed, molestie eget ante. 
+			    				</div>
+			    			</div>
+		    			</li>
+		    		</ul>
+		    		<div id="_stripe_container">
+		    			<div id="_strip_upper">
+			    			<label>Stripe</label>
+			    			<a href="subscription" id="_sub_back" class="btn btn-warning">Go Back</a>
+		    			</div>
+		    			<a href="#" class="_small_text">why stripe?</a>
+		    			<div class="form-group" id="_stripe_card_info">
+		    				<label>Cedit Card Information</label>
+		    				<input type="text" name="cname" placeholder="Name On Card" class="form-control">
+		    				<input type="text" name="cnumber" placeholder="Card Number" class="form-control">
+		    				<div id="_lower_card">
+			    				<div class="col-xs-4 _no_pad">
+			    					<input type="text" name="cvc" placeholder="CVC" class="form-control">
+			    				</div>
+			    				<div class="col-xs-4 _no_pad">
+			    					<input type="text" name="cdate" placeholder="Exp: MM/YY" class="form-control">
+			    				</div>
+			    			</div>
+			    			<button id="_stripe_purchase_btn" class="btn btn-primary">Purchase</button>
+		    			</div>
+		    		</div>
 		    	</div>
     		</div>
 		</div>
 	</div>
 </div>
+<script src="../socket.io/socket.io.js"></script>
+<script src="/javascripts/sub.io.js"></script>

@@ -1,32 +1,35 @@
 'use strict'
 var dbF 	= require('../../server/dbFunctions')
 var bcrypt 	= require('bcryptjs')
+var models  = require('../Models');
+var Model   = new models; 
 
 var table 	= 'users';
+
 function User(){
-	this.table = table
-				
-	this.fillables = ['username', 'name', 'email'] 	
-
-	var protect = ['id', 'password']
+	this.db = new dbF(table);
+	
+	function checkExists(username, email, callback){
+		this.db.find().where({email:email}, function(user){
+			if(user && user.length > 0)
+				callback('Email already registered.')
+		})
+		this.db.find().where({username:username}, function(user){
+			if(user && user.length > 0)
+				callback('Username already in use.')
+		})
+		callback(null, 'Make dat shit.')
+	}
 
 }
-User.prototype = new dbF(table);
-var xUser 	= new User;
 
-function checkExists(username, email, callback){
-	User.prototype.find().where({email:email}, function(user){
-		if(user && user.length > 0)
-			callback('Email already registered.')
+User.prototype.getCompanies = function(uid, callback){
+	Model.Company.getByUser(uid, function(companies){
+		callback(companies)
 	})
-	User.prototype.find().where({username:username}, function(user){
-		if(user && user.length > 0)
-			callback('Username already in use.')
-	})
-	callback(null, 'Make dat shit.')
 }
 
-xUser.createUser = function(newUser, callback)
+User.prototype.createUser = function(newUser, callback)
 {
 	bcrypt.genSalt(10, function(err, salt){
 		bcrypt.hash(newUser.password, salt, function(err, hash){
@@ -38,7 +41,7 @@ xUser.createUser = function(newUser, callback)
 					if(err){
 						callback(err)
 					}else{
-						User.prototype.create(newUser, function(err, user){
+						this.db.create(newUser, function(err, user){
 							if(err){
 								callback(err)
 							}else{
@@ -52,14 +55,15 @@ xUser.createUser = function(newUser, callback)
 	})
 }
 
-xUser.getUserByEither = function(uname_email, callback){
+User.prototype.getUserByEither = function(uname_email, callback){
+
 	var query
 	if(uname_email.includes('@'))
 		query = {email: uname_email}
 	else
 		query = {username: uname_email}
 
-	User.prototype.find().where(query, function(user){
+	this.db.find().where(query, function(user){
 		if(user.length == 0){
 			callback(null, false)
 		}else{
@@ -69,7 +73,7 @@ xUser.getUserByEither = function(uname_email, callback){
 
 }
 
-xUser.checkPassword = function(cPass, hash, callback){
+User.prototype.checkPassword = function(cPass, hash, callback){
 	bcrypt.compare(cPass, hash, function(err, isMatch){
 		if(err){
 			callback(err)
@@ -82,4 +86,4 @@ xUser.checkPassword = function(cPass, hash, callback){
 	})
 }
 
-module.exports = xUser
+module.exports = new User

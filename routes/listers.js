@@ -1,57 +1,85 @@
 var express = require('express');
 var router 	= express.Router();
 var models 	= require('../models/Models');
-var Model   = new models; 
+// var Model   = new models; 
 
 ////PUBLIC LISTER VIEWING
 router.get('/', function(req, res, next){
 	res.render('listers')
 })
+router.get('/crApi', function(req, res, next){
 
+})
 //////////////////////////////////////////////
 ////USER SIDE LISTER EDITING AND CREATING/////
 router.get('/new', [Auth, isComp], function(req, res, next) {
 	var cid
 	if(req.company_id)
 		cid = req.company_id	
-  	res.render('new_lister', { title: 'Name Of Lister', cid:cid});
+	Model.ListerType.getTypes(function(types){
+		Model.ListerType.displayTypes('btn', types, function(err, dis){
+			var types = '<div id="_lister_types">'+
+							dis+
+						'</div>'
+						
+
+  			res.render('new_lister', { title: 'Name Of Lister', cid:cid, types:types});
+		})
+	})
 });
 
 router.post('/new', Auth, function(req, res, next){
 	req.checkBody('lister_name', 'Lister Name is required').notEmpty();
+	req.checkBody('lister_type', 'You need to select a Lister type').notEmpty();
 	req.checkBody('company_id', 'There was a problem with Company info. Please contact support Team.').notEmpty();
 
 	var errors = req.validationErrors()
 	if(errors){
 		res.render('new_lister', {
 			errors:errors,
-			fields:{lister_name:req.body.lister_name, company_id:req.body.company_id}
+			fields:{
+				lister_name:req.body.lister_name, 
+				company_id:req.body.company_id,
+				lister_type:req.body.lister_type
+			}
 		})
 	}else{
 		var newLister = {
 			name:req.body.lister_name,
-			company_id:req.body.company_id
+			company_id:req.body.company_id,
+			lister_type_id:req.body.lister_type
 		}
 		Model.Lister.createLister(newLister, function(err, lister){
 			if(err){
 				res.render('new', {
 					errors:errors,
-					fields:{lister_name:req.body.lister_name, company_id:req.body.company_id}
+					fields:{
+						lister_name:req.body.lister_name, 
+						company_id:req.body.company_id,
+						lister_type:req.body.lister_type
+					}
 				})
 			}else{	
 				req.flash('success_msg', 'New lister created. Now add items to your lister.')
-				res.redirect('items/add/'+lister[0].id)
+				res.redirect('/')
 			}
 		})
 	}
 })
 
 
-router.get('/items/add/:lid', Auth, function(req, res, next) {	
-	res.render('lister_items', { 
-		title: 'Add items to Lister', 
-		lid:req.params.lid
-	});
+router.get('/items/add/:lid', [Auth, isMine], function(req, res, next) {
+	Model.Lister.listerType(req.params.lid, function(err, type){
+		if(err)
+			throw err
+		else
+			res.render('lister_items', { 
+				title: 'Add items to Lister', 
+				lid:req.params.lid,
+				type: type,
+				uid: req.user[0].id
+			});
+	})
 });
 
 router.post('/items', Auth, function(req, res){
@@ -144,6 +172,20 @@ router.post('/items', Auth, function(req, res){
 // router.get('/*', function(req, res, next) {
 // 	res.redirect('/dashboard')
 // });
+function isMine(req, res, next){
+	Model.Lister.isMine({uid:req.user[0].id, lid:req.params.lid}, function(err, check){
+		if(err){
+			throw err
+		}else{
+			if(check){
+				return next()
+			}else{
+				req.flash('error_msg', 'This is not your Lister.')
+				res.redirect('/')
+			}
+		}
+	})
+}
 
 function isComp(req, res, next){
 	Model.Company.getByUserId(req.user[0].id, function(err, company){

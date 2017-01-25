@@ -3,11 +3,8 @@ var dbF = require('../../server/dbFunctions');
 var table = 'user_transactions';
 
 function UserTrans(){
-	this.table = table
+	this.db = new dbF(table)
 
 }
 
-UserTrans.prototype = new dbF(table)
-var xUserTrans = new UserTrans
-
-module.exports = xUserTrans
+module.exports = new UserTrans

@@ -1,27 +1,18 @@
 'use strict'
 var dbF 	= require('../../server/dbFunctions');
-var table 	= 'lister_items';
-var models 	= require('../Models');
-var Model   = new models; 
-function ListerItem(){
-	this.table = table
-
-	this.fillables = ['name', 'image', 'description'] 	
-
-	var protect = ['id']
+var table 	= 'items';
+function Item(){
+	this.db = new dbF(table)
 
 }
 
-ListerItem.prototype = new dbF(table)
-var xListerItem = new ListerItem
-
-xListerItem.getItemData = function(lid, callback){
-	ListerItem.prototype.find().where({lister_id:lid}, function(items){
+Item.prototype.getAll = function(lid, callback){
+	this.db.find().where({lister_id:lid}, function(items){
 		callback(null, items)
 	})
 }
 
-xListerItem.displayItem = function(data, callback){
+Item.prototype.displayItem = function(data, callback){
 	var item 	= data
 	var attrs   = item.attrs
 	var images 	= attrs.images
@@ -72,7 +63,7 @@ xListerItem.displayItem = function(data, callback){
 				'<div class="_item_main_container">'+
 					'<div class="_item_nd">'+	
 						'<div class="_item_name">'+item.name+'</div>'+
-						'<div class="_item_description">'+item.description+'</div>'+
+						'<div class="_item_description">'+item.desc+'</div>'+
 					'</div>'+
 					'<div class="_item_data_container">'+
 						images+
@@ -91,17 +82,19 @@ xListerItem.displayItem = function(data, callback){
 	callback(null, html)
 }
 
-xListerItem.createItem = function(newItemX, callback)
+Item.prototype.createItem = function(newItemX, callback)
 {
 	var newItem = {lister_id:newItemX[0].value, name:newItemX[1].value, description:newItemX[2].value}
 	var attrs = newItemX.splice(3)
-	ListerItem.prototype.create(newItem, function(err, item){
+	this.db.create(newItem, function(err, item){
 		if(err){
 			callback(err)
 		}else{
 
 			Object.keys(attrs).forEach(function(a){
 				attrs[a].item_id = item[0]	
+				var models 	= require('../Models');
+				var Model   = new models; 
 				Model.ItemAttr.createAttr(attrs[a], function(err, msg){
 					if(err){
 						callback(err)
@@ -116,4 +109,4 @@ xListerItem.createItem = function(newItemX, callback)
 
 
 
-module.exports = xListerItem
+module.exports = new Item

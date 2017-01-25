@@ -1,9 +1,12 @@
-<div class="container" id="_new_lister">
+<div class="container" id="_new_item">
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	<div class="panel panel-default _raise">
         		<div class="panel-heading">
-			    	<h3 class="panel-title">Add An Item To Lister</h3>
+        			<div class="_item_header">
+				    	<h3 class="panel-title">Add An Item To Lister</h3>
+				    	<div id="_api_connect">{{{type}}}</div>
+				    </div>
 			    	{{#if errors}}
 			    		{{#each errors}}
 			    			<div class="alert alert-danger">
@@ -11,6 +14,10 @@
 			    			</div>
 			    		{{/each}}
 			    	{{/if}}
+			 	</div>
+			 	<div class="panel-body" id="_adding_api">
+			 		<input type="text" id="_api_search" class="form-control" placeholder="Start Typing Name of Dispensary">
+					<div id="_api_res"></div>
 			 	</div>
 			 	<div class="panel-body" id="_adding_items">
 			    	<form role="form" action="/listers/items" method="post" id="_adding_item_form">

@@ -1,0 +1,56 @@
+.panel {
+  margin-bottom: 0px; }
+
+#_subscription_selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0; }
+  #_subscription_selector ._subs {
+    width: 100%;
+    margin-bottom: 34px;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+    -o-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transition: 0.5s; }
+    #_subscription_selector ._subs ._lower_sub {
+      font-size: 0.8em; }
+  #_subscription_selector ._subs:hover {
+    background: #fd772b;
+    border-color: #fd772b;
+    box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 20px;
+    width: 103%;
+    margin-left: -10px;
+    -o-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transition: 0.5s; }
+
+#_stripe_container {
+  display: none;
+  flex-direction: column; }
+  #_stripe_container #_strip_upper {
+    display: flex;
+    justify-content: space-between; }
+    #_stripe_container #_strip_upper #_sub_back {
+      padding: 5px 5px; }
+  #_stripe_container #_stripe_card_info {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    padding: 8px; }
+    #_stripe_container #_stripe_card_info input {
+      margin-bottom: 5px; }
+    #_stripe_container #_stripe_card_info #_lower_card {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
+    #_stripe_container #_stripe_card_info #_stripe_purchase_btn {
+      align-self: flex-end; }

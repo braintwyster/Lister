@@ -1,4 +1,28 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald:700");
+#log {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  color: #fff;
+  width: 400px;
+  height: 200px;
+  border: #fff solid 4px;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  font: 12px arial, Helvetica, sans-serif; }
+
+#_log_h {
+  color: #ccff00; }
+
+._log_o {
+  color: #00ffcc; }
+
+._log_m {
+  color: #ffcc00; }
+
 body {
   padding-top: 50px;
   padding-bottom: 20px;
@@ -25,6 +49,9 @@ h1 {
 
 ._no_margin {
   margin: 0; }
+
+._small_text {
+  font-size: 0.7em; }
 
 .btn-success {
   background-color: #fd772b;

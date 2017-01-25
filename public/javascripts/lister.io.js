@@ -13,13 +13,13 @@ $(function(){
 	socket.on('lister data', function(data){
 		var html = ''
 		for(i =0; i < data.length; i++){
-			html += '<li class="btn btn-primary _list_item" id="'+data[i].id+'" data-name="'+data[i].name+'">'+data[i].name+'</li>'
+			html += '<li class="btn btn-primary _list_item_btn" id="'+data[i].id+'" data-name="'+data[i].name+'">'+data[i].name+'</li>'
 		}
 		$listerMenuData.html(html)
 	})
 
 ////HANDLE ITEMS
-	$listerMenuData.on("click", "._list_item", function(e){
+	$listerMenuData.on("click", "._list_item_btn", function(e){
 		$listerID = this.id
 		$listerData.html('')
 		$listHeader.html('')

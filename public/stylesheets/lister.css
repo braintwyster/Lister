@@ -1,3 +1,22 @@
+#_lister_types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+#_lister_types ._lister_type_btn {
+  padding: 5px;
+  border: 1px solid #fd772b;
+  border-radius: 5px;
+  background: #fd772b;
+  width: 48%;
+  margin-bottom: 5px; }
+
+#_lister_types ._lister_type_btn ._lister_type_desc {
+  font-size: 0.8em; }
+
+#_lister_types ._lister_type_btn:hover {
+  background: #fe630a; }
+
 #_lister_dash {
   display: flex; }
 
@@ -8,6 +27,9 @@
   display: flex;
   flex-direction: column; }
 
+#_list_brower #_lister_data ._list_item_btn {
+  margin-bottom: 5px; }
+
 #_list_brower #_lister_data ._lister_items {
   display: flex;
   flex-direction: row; }
@@ -15,9 +37,20 @@
 #_list_brower #_lister_data ._lister_items ._item_img {
   width: 20%; }
 
+#_new_item ._item_header {
+  display: flex;
+  flex: row;
+  justify-content: space-between; }
+
+#_new_item #_adding_api {
+  display: none; }
+
 #_lister_menu #_lister_menu_data {
   display: flex;
   flex-direction: column; }
+
+#_lister_menu #_lister_menu_data ._list_item_btn {
+  margin-bottom: 5px; }
 
 #_lister_menu #_lister_menu_data ._lister_items {
   display: flex;
@@ -52,6 +85,9 @@
   display: flex;
   flex-direction: column;
   list-style-type: none; }
+
+#_display_items #_lister_data ._lister_action_btn {
+  margin-bottom: 5px; }
 
 #_display_items #_lister_data .well {
   padding: 0px;

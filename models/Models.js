@@ -1,17 +1,22 @@
 'use strict'
 function Models(){
-	this.User 		= require('./user_models/User')
-	this.UserTime	= require('./user_models/UserTime')
-	this.UserTrans  = require('./user_models/UserTransactions')
-	this.UserSub	= require('./user_models/UserSubscription')
-	this.Company 	= require('./user_models/Company')
-	this.Lister 	= require('./lister_models/Lister')
-	this.ListerItem	= require('./lister_models/ListerItem')
-	this.ItemAttr	= require('./lister_models/ItemAttrs')
-	this.General	= require('./attributes/Generals')
-	this.Book		= require('./attributes/Books')
-	this.Drink		= require('./attributes/Drinks')
-	this.Weed		= require('./attributes/Weeds')
+	
+	this.Auth 		= require('./user_models/Auth');
+	this.User 		= require('./user_models/User');
+	this.UserTime	= require('./user_models/UserTime');
+	this.UserTrans  = require('./user_models/UserTransactions');
+	this.UserSub	= require('./user_models/UserSubscription');
+	this.Attr 		= require('./lister_models/Attribute');
+	this.Item		= require('./lister_models/Item');
+	this.ItemAttr	= require('./lister_models/ItemAttrs');
+	this.Position	= require('./lister_models/ItemPosition');
+	this.ItemType	= require('./lister_models/ItemType');
+	this.ItemCateg  = require('./lister_models/ItemCategory');
+	this.Lister 	= require('./lister_models/Lister');
+	this.ListerType	= require('./lister_models/ListerType');
+	this.Unit	 	= require('./lister_models/Unit');
+	this.Company 	= require('./user_models/Company');
+	this.Location 	= require('./user_models/Location');
 
 	this.GetAttrList= function(req, callback){
 		

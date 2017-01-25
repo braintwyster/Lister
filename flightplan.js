@@ -7,14 +7,14 @@ var startFile = 'bin/www';
 var tmpDir = appName+'-' + new Date().getTime();
 
 // configuration
-plan.target('staging', [
-  {
-    host: '159.203.247.120',
-    username: username,
-    privateKey: '~/.ssh/id_rsa',
-    agent: process.env.SSH_AUTH_SOCK
-  }
-]);
+// plan.target('staging', [
+//   {
+//     host: '159.203.247.120',
+//     username: username,
+//     privateKey: '~/.ssh/id_rsa',
+//     agent: process.env.SSH_AUTH_SOCK
+//   }
+// ]);
 
 plan.target('production', [
   {

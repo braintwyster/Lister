@@ -1,13 +1,14 @@
 'use strict'
 var dbF = require('../server/dbFunctions');
+var models  = require('../Models');
+var Model   = new models; 
+
 var table = '~table name~';
 
 function ModelName(){
-	this.table = table
-
+	this.db = new dbF
 }
 
-ModelName.prototype = new dbF(table)
-var xModelName = new ModelName
 
-module.exports = xModelName
+
+module.exports = ModelName

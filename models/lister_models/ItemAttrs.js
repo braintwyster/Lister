@@ -2,10 +2,7 @@
 var dbF 	= require('../../server/dbFunctions');
 var table 	= 'item_attrs';
 function ItemAttrs(){
-	this.table = table
-	this.fillables = ['value', 'type', 'unit'] 	
-
-	var protect = ['id']
+	this.db = new dbF(table)
 
 	function titleCase(str) {  
 	  	str = str.toLowerCase().split(' ');
@@ -89,7 +86,9 @@ function ItemAttrs(){
 					// '<div class="_attr_unit">'+attr.type+'</div>'+
 				'</div>';
 	}
-	this.processAttr = function (attr, clas = 'sub'){
+}
+
+ItemAttrs.prototype.processAttr = function (attr, clas = 'sub'){
 		var output
 		// console.log(attr)
 		if(attr.type == 'rating'){
@@ -125,12 +124,8 @@ function ItemAttrs(){
 		}
 		return output;
 	}
-}
 
-ItemAttrs.prototype = new dbF(table)
-var xItemAttrs = new ItemAttrs;
-
-xItemAttrs.attrSorter = function(iwas, callback){
+ItemAttrs.prototype.attrSorter = function(iwas, callback){
 	var attrs 	= iwas.joined
 	iwas.attrs 	= {}
 	var sort  	= iwas.attrs 
@@ -167,9 +162,9 @@ xItemAttrs.attrSorter = function(iwas, callback){
 	callback(null, iwas)
 }
 
-xItemAttrs.createAttr = function(newAttr, callback)
+ItemAttrs.prototype.createAttr = function(newAttr, callback)
 {
-	ItemAttrs.prototype.create(newAttr, function(err, item){
+	this.db.create(newAttr, function(err, item){
 		if(err){
 			callback(err)
 		}else{
@@ -180,4 +175,4 @@ xItemAttrs.createAttr = function(newAttr, callback)
 
 
 
-module.exports = xItemAttrs
+module.exports = new ItemAttrs

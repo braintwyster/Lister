@@ -73,6 +73,8 @@ app.use(flash())
 
 //Global Varaibles
 app.use(function (req, res, next){
+  res.setHeader('X-API-Key', '10b372e247bfc814403b07a985b0a87b97221b9f')
+
   res.locals.success_msg = req.flash('success_msg')
   res.locals.error_msg = req.flash('error_msg')
   res.locals.error = req.flash('error')

@@ -3,11 +3,8 @@ var dbF = require('../../server/dbFunctions');
 var table = 'user_time';
 
 function UserTime(){
-	this.table = table
-
+	this.db = new dbF(table)
+	
 }
 
-UserTime.prototype = new dbF(table)
-var xUserTime = new UserTime
-
-module.exports = xUserTime
+module.exports = new UserTime

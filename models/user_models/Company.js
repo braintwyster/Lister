@@ -1,37 +1,31 @@
 'use strict'
-var dbF = require('../../server/dbFunctions');
-var table = 'companies';
+var dbF 	= require('../../server/dbFunctions');
+var models  = require('../Models');
+var Model   = new models; 
+var async 	= require('async')
+
+var table 	= 'companies';
 
 function Company(){
-	this.table = table
-
-	this.fillables = ['name', 'location', 'phone', 'author_id'] 	
-
-	var protect = ['id']
+	this.db = new dbF(table)
 
 }
 
-Company.prototype = new dbF(table)
-var xComp = new Company;
-
-xComp.getById = function(req, callback){
-	Company.prototype.find(req, function(company){
+Company.prototype.getById = function(req, callback){
+	this.db.find(parseInt(req), function(company){
 		callback(null, company)
 	})
 }
 
-xComp.getByUserId = function(req, callback){
-	Company.prototype.find().where({user_id:req}, function(company){		
-		if(company.length == 0)
-			callback(true)
-		else
-			callback(null, company)
+Company.prototype.getByUser = function(uid, callback){
+	this.db.find().where({user_id:parseInt(uid)}, function(companies){		
+		callback(companies)
 	})
 }
 
-xComp.createCompany = function(newCompany, callback)
+Company.prototype.createCompany = function(newCompany, callback)
 {
-	Company.prototype.create(newCompany, function(err, data){
+	this.db.create(newCompany, function(err, data){
 		if(err){
 			callback(err)
 		}else{
@@ -39,4 +33,5 @@ xComp.createCompany = function(newCompany, callback)
 		}
 	})
 }
-module.exports = xComp
+module.exports = new Company
+

@@ -1,7 +1,7 @@
 var express = require('express');
-var router = express.Router();
-var models 			= require('../models/Models');
-var Model   		= new models; 
+var router 	= express.Router();
+var models 	= require('../models/Models');
+var Model   = new models; 
 
 /* GET home page. */
 router.get('/', AuthDash, function(req, res, next) {
@@ -13,7 +13,13 @@ router.get('/test', AuthDash, function(req, res, next) {
 });
 
 router.get('/dashboard', [Auth], function(req, res, next) {
-  	res.render('dashboard', { user:req.user[0].id});
+	Model.Auth.User(1, function(userData){
+		userData.password = ''
+		global.user = userData
+		
+		
+  		res.render('dashboard', { user:req.user[0].id});
+	})
 });
 
 router.get('/company', Auth, function(req, res, next){
@@ -21,38 +27,66 @@ router.get('/company', Auth, function(req, res, next){
 })
 
 router.post('/company', Auth, function(req, res, next){
+	var newCompany = {
+		name:req.body.company_name,
+		address:req.body.address,
+		city:req.body.city,
+		state:req.body.state,
+		zip:req.body.zip,
+		phone:req.body.phone,
+		user_id:req.user[0].id
+	}
+
 	req.checkBody('company_name', 'Company name is required').notEmpty();
-	req.checkBody('location', 'Location is required. Full address or just city/state.').notEmpty();
+	req.checkBody('address', 'Address is required.').notEmpty();
+	req.checkBody('city', 'City is required.').notEmpty();
+	req.checkBody('state', 'State is required.').notEmpty();
+	req.checkBody('zip', 'Zip is required.').notEmpty();
+	req.checkBody('zip', 'Zip Code must be a proper Zip Code (exp: 12345).').isInt({min:5})
 	req.checkBody('phone', 'Phone # is required').notEmpty();
 	req.checkBody('phone', 'Phone must be a USA phone #').isMobilePhone('en-US');
 	var errors = req.validationErrors()
-	
+		
 	if(errors){
 		res.render('new_company', {
 			errors:errors,
-			fields:{name:req.body.company_name, location:req.body.location, phone:req.body.phone}
+			fields:newCompany
 		})
-	}else{
-		var newCompany = {
-			name:req.body.company_name,
-			location:req.body.location,
-			phone:req.body.phone,
-			user_id:req.user[0].id
-		}
-		Model.Company.createCompany(newCompany, function(err, company){
-			if(err){
-				res.render('new_company', {
-					errors:errors,
-					fields:{name:req.body.name, location:req.body.location, phone:req.body.phone}
+		return
+	}
+	var	address = {
+		street:newCompany.address,
+		city:newCompany.city,
+		state:newCompany.state,
+		postalCode:newCompany.zip,
+		country:'US'
+	};
+
+	Model.Location.AddressValidator(address, function(err, location){
+		if(err){
+			res.render('new_company', {
+				errors:err,
+				fields:newCompany
+			})	
+		}else{
+			if(location.exact.length > 0){
+				Model.Company.createCompany(newCompany, function(err, company){
+					if(err){
+						res.render('new_company', {
+							errors:errors,
+							fields:newCompany
+						})
+					}else{
+						// cid = company[0].id;
+						res.redirect('/listers/new')
+					}
 				})
 			}else{
-				cid = company[0].id;
-				res.redirect('/listers/new')
+				console.log('Did You Mean?')
 			}
-		})
-	}
+		}
+	})
 })
-
 
 function Auth(req, res, next){
 	if(req.isAuthenticated()){

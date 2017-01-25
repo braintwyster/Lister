@@ -1,7 +1,10 @@
 module.exports = function (io) { 
+	console.log(global.user)
+	
 	var models  = require('../models/Models');
 	var Model   = new models; 
-
+	var crAPI 	= require('../custom_modules/cannabis_report/cannabis_report')	
+	
 	connections = []
 	listers 	= {}
 	io.sockets.on('connection', function(socket){
@@ -33,7 +36,7 @@ module.exports = function (io) {
 			}
 		})
 		socket.on('update lister', function(lid){
-			Model.Lister.getChild(lid, function(data){
+			Model.Lister.getItems(lid, function(data){
 				if(listers[lid]){
 					ls = listers[lid].socketIDs
 					for (var i = 0; i < ls.length; i++) {
@@ -47,7 +50,7 @@ module.exports = function (io) {
 /////////////////////
 		///Get all lister		
 		socket.on('get listers', function(){
-			Model.Lister.find('all', function(data){
+			Model.Lister.db.find('all', function(data){
 				socket.emit('lister data', data)
 			})
 		})
@@ -57,16 +60,16 @@ module.exports = function (io) {
 		///GET LISTER ITEMS 
 		socket.on('get this lister', function(lid){
 				// console.log(lid)
-			Model.Lister.getChild(lid, function(data){
+			Model.Lister.getItems(lid, function(data){
 				socket.emit('send items', data, lid, false)
 			})
 		})
 		
 		socket.on('get attrs', function(data){
 			for (var i = 0; i <data.length; i++) {
-				Model.ItemAttr.find().whereJoin({item_id:data[i].id}, data[i], function(iwa){
+				Model.ItemAttr.db.find().whereJoin({item_id:data[i].id}, data[i], function(iwa){
 					Model.ItemAttr.attrSorter(iwa, function(err, data){
-						Model.ListerItem.displayItem(data, function(err, data){
+						Model.Item.displayItem(data, function(err, data){
 							socket.emit('lister item data', data)	
 						})
 					})
@@ -113,7 +116,13 @@ module.exports = function (io) {
 	///////////////////
 		///Public ListerIO Communication///
 
-
+		/////////////////
+	/////////////
+	/////////////////
+		///User Item API//
+		socket.on('get api', function(apiData){
+			console.log(apiData)
+		})
 	})
 }
 

@@ -1,6 +1,7 @@
 $(function(){
 	var socket 			= io.connect(),
-		$addDiv 		= $('#_add_items'),
+		$addDiv 		= $('#_adding_items'),
+		$addApi 		= $('#_adding_api'),
 		$addForm		= $('#_adding_item_form'),
 		$addAttrBtn		= $('#_add_attr_btn'),
 		$attrChoice		= $('#_attr_choice'),
@@ -9,7 +10,10 @@ $(function(){
 		$attrSelector 	= $('#_attr_choice_selector'), 	
 		$attrData 		= $('#_attr_choice_data'),
 		$attrAddBtn 	= $('#_pick_new_attr'),
-		$attrMsg 		= $('#_attr_msg') 	
+		$attrMsg 		= $('#_attr_msg'), 
+		$apiConnect 	= $('._api_connect_btn'),
+		$ApiSearch 		= $('#_api_search'),
+		$apiType 		= 0,
 		$preCheck 		= {
 			'image':{max:5, added:0},
 			'rating':{max:1, added:0},
@@ -32,6 +36,19 @@ $(function(){
 			'grower':{max:1, added:0},
 			'weight':{max:1, added:0}
 		}
+
+	$apiConnect.click(function(){
+		$addDiv.hide()
+		$addApi.show()
+		$apiType = $apiConnect[0].dataset.tid
+	})
+
+	$ApiSearch.keypress(function(e){
+		if(e.keyCode == 13){
+			socket.emit('get api', {tid:$apiType, value:$(this).val()})
+		}
+	})
+
 	$addAttrBtn.click(function(e){
 		e.preventDefault()
 	    socket.emit('get add attr')

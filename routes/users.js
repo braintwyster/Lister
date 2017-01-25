@@ -84,16 +84,20 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done){
-	Model.User.find(id, function(user){
+	Model.User.db.find(id, function(user){
 		done(null, user)
 	})
 })
 
 router.post('/login',
-	passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/users/login', failureFlash: true}),
-	function(req, res) {
-		res.redirect('/dashboard')
-	});
+	passport.authenticate('local', 
+		{
+			successRedirect:'/dashboard', 
+			failureRedirect:'/users/login', 
+			failureFlash: true
+		}
+	)
+);
 
 router.get('/logout', function(req, res){
 	req.logout()
